@@ -2,11 +2,19 @@ import java.util.*;
 public class MyDeque<E>{
   private E[] data;
   private int size, start, end;
+  public static int modulus(int i, int j){
+      if(i%j < 0){
+          return i%j + j;
+      }
+      return i%j;
+  }
   public static void main(String[] args) {
       MyDeque<Integer> test = new MyDeque<Integer> ();
       test.addFirst(2);
       test.addLast(3);
+      test.toDebug();
       System.out.println(test);
+      System.out.println(test.size());
       System.out.println(test.getLast());
   }
   @SuppressWarnings("unchecked")
@@ -28,10 +36,17 @@ public class MyDeque<E>{
 }
   public String toString(){
       String output = "";
-      for(int i = start; i < start + end; i++){
+      for(int i = start; i < start + size; i++){
           output += data[i%data.length].toString();
       }
       return "{" + output + "}";
+  }
+
+  public void toDebug(){
+      for (E i: data){
+          System.out.print(i);
+      }
+      System.out.println();
   }
   public void addFirst(E element){
       if(element == null){
@@ -40,14 +55,11 @@ public class MyDeque<E>{
       if(size == data.length){
       resize();
       }
-      if(start == 0){
-          start = size;
-          data[size] = element;
-      } else{
-          data[start-1] = element;
-          start++;
-      }
+      data[modulus((start-1*(size)),data.length)] = element;
+      start = modulus((start-1),data.length);
+      size++;
   }
+
   public void addLast(E element){
       if(element == null){
           throw new NullPointerException();
@@ -55,7 +67,8 @@ public class MyDeque<E>{
       if(size == data.length){
       resize();
       }
-      data[end+1] = element;
+      data[(end+1)%data.length] = element;
+      end = (end+1)%data.length;
       size++;
   }
   public E removeFirst(){
