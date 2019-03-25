@@ -10,7 +10,9 @@ public class MyDeque<E>{
   }
   public static void main(String[] args) {
       MyDeque<Integer> test = new MyDeque<Integer> ();
-      test.addLast(3);
+      System.out.println(test);
+      test.addLast(1);
+      System.out.println(test);
       test.addFirst(2);
       test.addLast(3);
       test.addFirst(4);
@@ -19,15 +21,23 @@ public class MyDeque<E>{
       System.out.println(test.size());
       System.out.println(test.getLast());
       test = new MyDeque<Integer> ();
-      for (int i = 9; i > -1 ; i--){
+      for (int i = 9; i > 0 ; i--){
           test.addLast(i);
       }
+      test.addFirst(0);
+      System.out.println(test);
+      test.toDebug();
+      System.out.println("now let's add 10 to the beginning!");
       test.addFirst(10);
       System.out.println(test);
+      test.toDebug();
+      System.out.println("last " + test.getLast());
+      System.out.println("first " + test.getFirst());
+      System.out.println("size " + test.size());/*
       test.removeFirst();
       System.out.println(test);
       test.removeLast();
-      System.out.println(test);
+      System.out.println(test);*/
   }
   @SuppressWarnings("unchecked")
   public MyDeque(){
@@ -57,12 +67,23 @@ public class MyDeque<E>{
       return "{" + output + "}";
   }
 
+  public String toDebugString(){
+      String output = "";
+      for (E i: data){
+          output += i + ",";
+      }
+      if (output.length() > 0){
+          output = output.substring(0,output.length()-1);
+      }
+      return "{" + output + "}";
+  }
   public void toDebug(){
       for (E i: data){
           System.out.print(i);
       }
       System.out.println();
   }
+
   public void addFirst(E element){
       if(element == null){
           throw new NullPointerException();
@@ -127,9 +148,11 @@ public class MyDeque<E>{
   @SuppressWarnings("unchecked")
   private void resize(){
     E[] newData = (E[])new Object[(size() * 2) + 1];
-    for (int x = 0; x < size(); x++){
-      newData[x] = data[x];
+    for(int x = 0, i = start; i < start + size; i++, x++){
+      newData[x] = data[i%data.length];
     }
     data = newData;
+    start = 0;
+    end = size - 1;
   }
 }

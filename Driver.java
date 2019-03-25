@@ -2,13 +2,13 @@ import java.util.*;
 
 public class Driver {
 
-	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
 
 	Important: this Driver is contingent on your toString already working. If your toString is broken, you may recieve confusing results.
 
 
-	 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */ 
+	 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 	private static String message(String input, String desired, String output) {
 		return String.format("\n%s\n\n\tDesired output:   %s\n\tYour output:      %s", input, desired, output);
@@ -31,7 +31,7 @@ public class Driver {
 
 	private static String gist_string(MyDeque<Integer> a) {
 		String full;
-		try {full = a.toString();}
+		try {full = a.toDebugString();}
 		catch (Exception e) {return "toString threw: "+e;}
 
 		if (full.length() < 30) return full;
@@ -155,10 +155,12 @@ public class Driver {
 				deque.addFirst(i);
 				comp.addFirst(i);
 				if (!edge_check(comp, deque)) {
+					System.out.println("here");
 					out.add(message(old+".addFirst("+i+")", gist_string(comp), gist_string(deque)));
 					break;
 				}
 				if (comp.size() != deque.size()) {
+					System.out.println("here1");
 					out.add(message(old+".addFirst("+i+")\n"+gist_string(deque)+".size()", comp.size(), deque.size()));
 					break;
 				}
@@ -197,13 +199,21 @@ public class Driver {
 		for (int i = 0; i < 500; i++) {
 			String old = gist_string(deque);
 			try {
+				System.out.println(deque);
+				//System.out.println(deque.getFirst());
+				System.out.println(comp);
 				deque.addLast(i);
 				comp.addLast(i);
 				if (!edge_check(comp, deque)) {
+					//System.out.println("here:");
+					System.out.println(deque);
+					//System.out.println(deque.getFirst());
+					System.out.println(comp);
 					out.add(message(old+".addLast("+i+")", gist_string(comp), gist_string(deque)));
 					break;
 				}
 				if (comp.size() != deque.size()) {
+					System.out.println("here1");
 					out.add(message(old+".addLast("+i+")\n"+gist_string(deque)+".size()", comp.size(), deque.size()));
 					break;
 				}
