@@ -10,14 +10,17 @@ public class Calculator{
         MyDeque<String> idk = new MyDeque<String>();
         for (String i : hold){
             if(i == "+"){
-                idk.addLast(idk.removeLast() + idk.removeLast());
+                idk.addLast("" + Double.parseDouble(idk.removeLast()) + Double.parseDouble(idk.removeLast()));
             } else if(i == "-"){
-                idk.addLast((parseInt(idk.removeLast()) - parseInt(idk.removeLast())) * -1);
+                idk.addLast("" + (Double.parseDouble(idk.removeLast()) - Double.parseDouble(idk.removeLast()) * -1));
             } else if(i == "*"){
-                idk.addLast(parseInt(idk.removeLast()) * parseInt(idk.removeLast()));
+                idk.addLast("" + Double.parseDouble(idk.removeLast()) * Double.parseDouble(idk.removeLast()));
             } else if(i == "/"){
-                idk.addLast(1/(idk.removeLast() / idk.removeLast()));
+                idk.addLast("" + 1/(Double.parseDouble(idk.removeLast()) / Double.parseDouble(idk.removeLast())));
+            } else{
+                idk.addLast(i);
             }
         }
+        return Double.parseDouble(idk.removeLast());
     }
 }
