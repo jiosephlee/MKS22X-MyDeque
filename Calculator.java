@@ -7,6 +7,7 @@ public class Calculator{
      */
     public static void main(String[] args) {
         System.out.println(eval("10 2.0 +") + " : should be 12");
+        System.out.println(eval("10 3.0 %") + " : should be 1");
         System.out.println(eval("11 3 - 4 + 2.5 *") + " : should be 30");
         System.out.println(eval("8 2 + 99 9 - * 2 + 9 -") + " : should be 893");
         System.out.println(eval("1 2 3 4 5 + * - -") + " : should be 26");
