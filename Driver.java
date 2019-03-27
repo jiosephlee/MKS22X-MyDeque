@@ -199,21 +199,24 @@ public class Driver {
 		for (int i = 0; i < 500; i++) {
 			String old = gist_string(deque);
 			try {
-				System.out.println(deque);
+				//System.out.println(deque);
 				//System.out.println(deque.getFirst());
-				System.out.println(comp);
+				//System.out.println(comp);
 				deque.addLast(i);
 				comp.addLast(i);
+				//System.out.println(deque);
+				//System.out.println(deque.getFirst());
+				//System.out.println(comp);
 				if (!edge_check(comp, deque)) {
 					//System.out.println("here:");
-					System.out.println(deque);
+					//System.out.println(deque);
 					//System.out.println(deque.getFirst());
-					System.out.println(comp);
+					//System.out.println(comp);
 					out.add(message(old+".addLast("+i+")", gist_string(comp), gist_string(deque)));
 					break;
 				}
 				if (comp.size() != deque.size()) {
-					System.out.println("here1");
+					//System.out.println("here1");
 					out.add(message(old+".addLast("+i+")\n"+gist_string(deque)+".size()", comp.size(), deque.size()));
 					break;
 				}

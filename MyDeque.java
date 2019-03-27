@@ -23,7 +23,10 @@ public class MyDeque<E>{
       test = new MyDeque<Integer> ();
       for (int i = 9; i > 0 ; i--){
           test.addLast(i);
+          test.removeFirst();
+          System.out.println(test);
       }
+      System.out.println("there should be nothing");
       test.addFirst(0);
       System.out.println(test);
       test.toDebug();
@@ -93,6 +96,8 @@ public class MyDeque<E>{
       }
       if(size == 0){
           data[0] = element;
+          start = 0;
+          end = 0;
       } else {
           data[modulus((start-1),data.length)] = element;
           start = modulus((start-1),data.length);
@@ -109,6 +114,8 @@ public class MyDeque<E>{
       }
       if(size == 0){
           data[0] = element;
+          start = 0;
+          end = 0;
       } else {
           data[(end+1)%data.length] = element;
           end = (end+1)%data.length;
